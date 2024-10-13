@@ -11,7 +11,9 @@
 
 :small_blue_diamond: [Funcionalidades](#funcionalidades)
 
-:small_blue_diamond: [Pré-requisitos](#pré-requisitos)
+:small_blue_diamond: [Pré-requisitos](#conceitos-importantes)
+
+:small_blue_diamond: [Pré-requisitos](#pré-requisitos-e-execucao)
 
 ... 
 
