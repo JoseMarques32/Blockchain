@@ -13,7 +13,7 @@
 
 :small_blue_diamond: [Conceitos Importantes](#conceitos-importantes)
 
-:small_blue_diamond: [Pré-requisitos e Execução](#pré--requisitos-e-execucao)
+:small_blue_diamond: [Pré-requisitos e Execução](#pré--requisitos-e-execução)
 
 ... 
 
