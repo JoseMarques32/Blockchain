@@ -13,7 +13,7 @@
 
 :small_blue_diamond: [Conceitos Importantes](#conceitos-importantes)
 
-:small_blue_diamond: [Pré-requisitos e Execução](#pré-requisitos-e-execucao)
+:small_blue_diamond: [Pré-requisitos e Execução](#pré--requisitos-e-execucao)
 
 ... 
 
@@ -33,7 +33,7 @@
 
 :heavy_check_mark: Informações com o nome do usuário e o valor da transação
   
-## Conceitos Importantes :grey_exclamation:
+## Conceitos Importantes 
 
 :arrow_right: Lista Encadeada: Cada bloco tem uma referência ao próximo bloco (nextBlock), formando uma lista encadeada de blocos. 
 <br>
