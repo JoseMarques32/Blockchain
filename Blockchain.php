@@ -1,13 +1,15 @@
 <?php
 class Blockchain {
     public $chain;
-    
-    public function __construct() {
+    public $difficulty;
+
+    public function __construct($difficulty = 2) {
+        $this->difficulty = $difficulty;
         $this->chain = $this->createGenesisBlock();
     }
 
     public function createGenesisBlock() {
-        return new Block([new Transaction('Genesis', 'Genesis', 0)], '0');
+        return new Block([new Transaction('Genesis', 'Genesis', 0)], '0', $this->difficulty);
     }
 
     public function getLastBlock() {
@@ -19,8 +21,14 @@ class Blockchain {
     }
 
     public function addBlock($transactions) {
+        foreach ($transactions as $tx) {
+            if (!$this->isAddressValid($tx->sender) || !$this->isAddressValid($tx->receiver)) {
+                echo "Invalid address.\n";
+                return;
+            }
+        }
         $previousBlock = $this->getLastBlock();
-        $newBlock = new Block($transactions, $previousBlock->hash);
+        $newBlock = new Block($transactions, $previousBlock->hash, $this->difficulty);
         $previousBlock->addNextBlock($newBlock);
     }
 
@@ -38,6 +46,25 @@ class Blockchain {
             $currentBlock = $nextBlock;
         }
         return true;
+    }
+
+    public function isAddressValid($address) {
+        return preg_match('/^[a-f0-9]{40}$/', $address); 
+    }
+
+    public function getTransactionHistory($address) {
+        $history = [];
+        $currentBlock = $this->chain;
+
+        while ($currentBlock != null) {
+            foreach ($currentBlock->transactions as $tx) {
+                if ($tx->sender === $address || $tx->receiver === $address) {
+                    $history[] = $tx->toString();
+                }
+            }
+            $currentBlock = $currentBlock->nextBlock;
+        }
+        return $history;
     }
 
     public function printBlockchain() {
