@@ -1,4 +1,4 @@
-<h1> Blockchain em PHP </h1> 
+<h1> Blockchain </h1> 
 
 <p align="center">
   <img src="https://img.shields.io/static/v1?label=php&message=Linguagem&color=blue&style=for-the-badge&logo=PHP"/>
@@ -20,27 +20,32 @@
 ## Descrição do projeto 
 
 <p align="justify">
-   Esta aplicação é uma implementação básica de uma rede blockchain utilizando PHP. Ela simula uma cadeia de blocos (blockchain) em que transações podem ser registradas e agrupadas em blocos. 
-  
-  Cada bloco contém uma referência ao bloco anterior, formando uma lista encadeada. A aplicação permite a criação de transações, a inclusão dessas transações em blocos, a inserção dos blocos na rede e a validação da autenticidade da blockchain.
+   Este é um projeto de uma blockchain simples desenvolvida em PHP, com funcionalidades de transação, validação de blocos, e um sistema de Proof of Work. O objetivo do projeto é implementar os conceitos fundamentais de uma blockchain, incluindo uma estrutura de cadeia de blocos, transações entre endereços válidos, e mineração de blocos com dificuldade ajustável. A blockchain permite o registro e rastreamento de transações, além de validação de integridade da cadeia.
 </p>
 
 ## Funcionalidades
 
-:heavy_check_mark: Mostra o Hash atual
+:heavy_check_mark: Criação de Blocos
 
-:heavy_check_mark: Mostra o Hash anterior
+:heavy_check_mark: Mineração com Proof of Work (PoW)
 
-:heavy_check_mark: Informações com o nome do usuário e o valor da transação
+:heavy_check_mark: Validação de Blocos
+
+:heavy_check_mark: Validação de Endereços
+
+:heavy_check_mark: Histórico de Transações por Endereço
   
 ## Conceitos Importantes 
 
-:arrow_right: Lista Encadeada: Cada bloco tem uma referência ao próximo bloco (nextBlock), formando uma lista encadeada de blocos. 
+:arrow_right: Blocos e Cadeia de Blocos: A blockchain é composta por uma sequência de blocos conectados, onde cada bloco guarda o hash do anterior, formando uma estrutura encadeada.
 <br>
-:arrow_right: Hash: O hash do bloco é uma representação única dos dados dentro do bloco. Se os dados (como as transações ou o hash anterior) mudarem, o hash também muda.
+:arrow_right: Transações: As transações representam transferências de valores entre endereços. Cada transação contém um remetente, um destinatário e um valor.
 <br>
-:arrow_right: Validação: A blockchain é validada verificando se o hash de cada bloco está correto e se corresponde ao hash armazenado no bloco seguinte.
-
+:arrow_right: Proof of Work (PoW): O PoW é um mecanismo de consenso que exige um esforço computacional para validar novos blocos. Neste projeto, o PoW é realizado tentando diferentes valores de nonce até que o hash do bloco tenha um número de zeros especificado pela dificuldade.
+<br>
+:arrow_right: Validação de Endereços: Os endereços são validados como strings hexadecimais de 40 caracteres. Apenas transações entre endereços válidos são permitidas, aumentando a integridade da rede.
+<br>
+:arrow_right: Histórico de Transações: A blockchain mantém um histórico de transações, mas uma função adicional permite buscar transações associadas a um endereço específico, retornando todas as ocorrências desse endereço como remetente ou destinatário.
 <hr>
 
 ## Pré-requisitos e Execução
