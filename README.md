@@ -20,7 +20,7 @@
 ## Descrição do projeto 
 
 <p align="justify">
-   Este é um projeto de uma blockchain simples desenvolvida em PHP, com funcionalidades de transação, validação de blocos, e um sistema de Proof of Work. O objetivo do projeto é implementar os conceitos fundamentais de uma blockchain, incluindo uma estrutura de cadeia de blocos, transações entre endereços válidos, e mineração de blocos com dificuldade ajustável. A blockchain permite o registro e rastreamento de transações, além de validação de integridade da cadeia.
+   Este é um projeto de uma blockchain simples desenvolvida em PHP, com funcionalidades de transação, validação de blocos, sistema de Proof of Work, recompensas por mineração e propagação e comunicação de entre os nós da rede blockchain. O objetivo do projeto é implementar os conceitos fundamentais de uma blockchain, incluindo uma estrutura de cadeia de blocos, transações entre endereços válidos, mineração de blocos com dificuldade ajustável, recompensa para mineradores. A blockchain permite o registro e rastreamento de transações, além de validação de integridade da cadeia.
 </p>
 
 ## Funcionalidades
@@ -34,6 +34,16 @@
 :heavy_check_mark: Validação de Endereços
 
 :heavy_check_mark: Histórico de Transações por Endereço
+
+:heavy_check_mark: Validação de Transações e Blocos
+
+:heavy_check_mark: Resolução de conflitos(forks)
+
+:heavy_check_mark: Gestão de Saldos 
+
+:heavy_check_mark: Recompensas para mineradores
+
+:heavy_check_mark: Propagação dos blocos e comunicação entre os nós da rede
   
 ## Conceitos Importantes 
 
@@ -45,7 +55,11 @@
 <br>
 :arrow_right: Validação de Endereços: Os endereços são validados como strings hexadecimais de 40 caracteres. Apenas transações entre endereços válidos são permitidas, aumentando a integridade da rede.
 <br>
+:arrow_right: Saldos: Os endereços possuem saldos, servindo como forma de moeda para realizar transaçãoes, ou seja, ele só pode fazer transações se tiver saldo suficiente para isso.
+<br>
 :arrow_right: Histórico de Transações: A blockchain mantém um histórico de transações, mas uma função adicional permite buscar transações associadas a um endereço específico, retornando todas as ocorrências desse endereço como remetente ou destinatário.
+<br>
+:arrow_right: Recompensas por mineração: Os mineradores são agentes responsáveis por resolver problemas complexos de determinado bloco da blockchain, isso é chamado de mineração. Sempre que um minerador consegue êxito em minerar algum bloco, ele é devidamente recompesado por isso.  
 <hr>
 
 ## Pré-requisitos e Execução
