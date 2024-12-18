@@ -1,42 +1,57 @@
 <?php
 class Block {
-    public $previousHash;
-    public $transactions;
+    public $index;
     public $timestamp;
+    public $transactions;
+    public $previousHash;
     public $hash;
-    public $nextBlock = null;
     public $nonce;
     public $difficulty;
 
-    public function __construct($transactions, $previousHash = '', $difficulty = 2) {
+    public function __construct($index, $transactions, $previousHash = '', $difficulty = 4) {
+        $this->index = $index;
+        $this->timestamp = time();
         $this->transactions = $transactions;
         $this->previousHash = $previousHash;
-        $this->timestamp = time();
         $this->difficulty = $difficulty;
         $this->nonce = 0;
-        $this->mineBlock();
+        $this->hash = $this->mineBlock();
     }
 
     public function calculateHash() {
-        return hash('sha256', $this->previousHash . $this->timestamp . $this->nonce . serialize($this->transactions));
+        $transactionsString = implode('', array_map(function($tx) {
+            return $tx->getHash();
+        }, $this->transactions));
+
+        return hash('sha256', 
+            $this->index . 
+            $this->previousHash . 
+            $this->timestamp . 
+            $transactionsString . 
+            $this->nonce
+        );
     }
 
     public function mineBlock() {
         $target = str_repeat('0', $this->difficulty);
-        while (substr($this->hash = $this->calculateHash(), 0, $this->difficulty) !== $target) {
+        
+        while (substr($hash = $this->calculateHash(), 0, $this->difficulty) !== $target) {
             $this->nonce++;
         }
-    }
-
-    public function addNextBlock($block) {
-        $this->nextBlock = $block;
+        
+        return $hash;
     }
 
     public function toString() {
         $txs = array_map(function($tx) {
             return $tx->toString();
         }, $this->transactions);
-        return "Block: " . $this->hash . "\nPrevious Hash: " . $this->previousHash . "\nNonce: " . $this->nonce . "\nTransactions: " . implode(', ', $txs) . "\n";
+
+        return "Block #" . $this->index . 
+               "\nHash: " . $this->hash . 
+               "\nPrevious Hash: " . $this->previousHash . 
+               "\nNonce: " . $this->nonce . 
+               "\nTransactions: " . implode(', ', $txs) . "\n";
     }
 }
 ?>

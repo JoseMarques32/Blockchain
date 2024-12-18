@@ -1,25 +1,44 @@
 <?php
-require_once('Transaction.php');
-require_once('Block.php');
-require_once('Blockchain.php');
+require_once 'Transaction.php';
+require_once 'Block.php';
+require_once 'Blockchain.php';
+require_once 'Node.php';
 
-$blockchain = new Blockchain(2); 
+
+$blockchain = new Blockchain(4, 50);
 
 
-$blockchain->addBlock([
-    new Transaction('abcdef1234567890abcdef1234567890abcdef12', 'abcdef1234567890abcdef1234567890abcdef13', 50),
-    new Transaction('abcdef1234567890abcdef1234567890abcdef13', 'abcdef1234567890abcdef1234567890abcdef14', 30)
-]);
+$minerNode = new Node($blockchain, 'abcdef1234567890abcdef1234567890abcdef12');
+$node1 = new Node($blockchain, 'abcdef1234567890abcdef1234567890abcdef13');
+$node2 = new Node($blockchain, 'abcdef1234567890abcdef1234567890abcdef14');
 
-$blockchain->addBlock([
-    new Transaction('abcdef1234567890abcdef1234567890abcdef14', 'abcdef1234567890abcdef1234567890abcdef15', 20),
-    new Transaction('abcdef1234567890abcdef1234567890abcdef15', 'abcdef1234567890abcdef1234567890abcdef16', 10)
-]);
+$blockchain->setInitialBalance($minerNode->getAddress(), 1000);
+$blockchain->setInitialBalance($node1->getAddress(), 500);
+$blockchain->setInitialBalance($node2->getAddress(), 300);
 
-echo "Is blockchain valid? " . ($blockchain->isChainValid() ? "Yes" : "No") . "\n";
-$blockchain->printBlockchain();
 
-$address = 'abcdef1234567890abcdef1234567890abcdef14';
-echo "Transaction history for address $address:\n";
-$history = $blockchain->getTransactionHistory($address);
-echo implode("\n", $history) . "\n";
+
+try {
+    
+   
+    $node1->createTransaction($node2->getAddress(), 50, 1);
+    $minerNode->mineBlock();
+   
+   
+
+    
+    echo "Saldo Minerador: " . $minerNode->getBalance() . "\n";
+    echo "Saldo Node 1: " . $node1->getBalance() . "\n";
+    echo "Saldo Node 2: " . $node2->getBalance() . "\n";
+
+    
+    echo "Blockchain válida? " . 
+        ($blockchain->isChainValid() ? "Sim" : "Não") . "\n";
+
+   
+    $blockchain->printBlockchain();
+
+} catch (Exception $e) {
+    echo "Erro: " . $e->getMessage() . "\n";
+}
+?>
